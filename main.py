@@ -5,8 +5,8 @@ import random
 pygame.init()
 
 # Set up display
-width, height = 800, 800
-arrayLength = 800
+width, height = 1800, 1000
+arrayLength = 1800
 barWidth = width / arrayLength
 barHeightRate = height / arrayLength
 screen = pygame.display.set_mode((width, height))
@@ -39,11 +39,12 @@ def render():
 def renderLine(t):
     for x in range(n):
         if x < n - t:
-            drawPoint(x * width / n, height - (x / (x + t + 0.0001)) * height, YELLOW)
+            # drawPoint(x * width / n, height - (x / (x + t + 0.0001)) * height, YELLOW)
+            pygame.draw.line(screen, YELLOW, func(x, t), func(x + 1, t), 2)
 
 
-def drawPoint(x, y, color):
-    pygame.draw.circle(screen, color, (x, y), 2)
+def func(x, t):
+    return (x * width / n, height - (x / (x + t + 0.0001)) * height)
 
 
 # Bubble sort algorithm
@@ -65,8 +66,9 @@ while running:
         render()
         renderLine(i)
         pygame.display.flip()
-        clock.tick(15)
+        # clock.tick(15)
         i += 1
+
 
 # Quit Pygame
 pygame.quit()
